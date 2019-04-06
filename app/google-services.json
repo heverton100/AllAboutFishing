@@ -1,0 +1,52 @@
+{
+  "project_info": {
+    "project_number": "232047063631",
+    "firebase_url": "https://all-about-fishing.firebaseio.com",
+    "project_id": "all-about-fishing",
+    "storage_bucket": "all-about-fishing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232047063631:android:8cb57bdae3168ba4",
+        "android_client_info": {
+          "package_name": "com.pucpr.heverton.allaboutfishing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232047063631-47v96aktm3ttfpvse46a5m2b2ctlq420.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pucpr.heverton.allaboutfishing",
+            "certificate_hash": "365e2d8975cfe094543831508fa024e40fa0b7de"
+          }
+        },
+        {
+          "client_id": "232047063631-s1i1616t55odulam9pkgts4f9vlj9a97.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pucpr.heverton.allaboutfishing",
+            "certificate_hash": "b5bdef93c246d62e2ae2a750f07552a84ce645a1"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG6IqXZp1fZe1PnOCPlu3BE7mZ_O-cqts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232047063631-61slgqe6k3raligtae9o4ftif2ogqi7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
