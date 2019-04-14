@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
 
-        mEmailField = findViewById(R.id.txtLogin);
-        mPasswordField = findViewById(R.id.txtSenha);
+        mEmailField = findViewById(R.id.txtMailLogin);
+        mPasswordField = findViewById(R.id.txtSenhaLogin);
 
         findViewById(R.id.btnEntrar).setOnClickListener(this);
         findViewById(R.id.btnCriarConta).setOnClickListener(this);
@@ -49,10 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
 
-
-
-
-
     }
 
 
@@ -63,8 +59,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.addAuthStateListener(authStateListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
-
-
 
     private void signIn(String email, String password) {
         if (!validateForm()) {
@@ -113,8 +107,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return valid;
     }
 
-
-
     @Override
     public void onClick(View v) {
         int i = v.getId();
@@ -123,18 +115,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }else if (i == R.id.btnCriarConta) {
             Intent intent = new Intent(this,RegistroActivity.class);
             startActivityForResult(intent,1);
+            finish();
         }
     }
 
-
-
-
     public void GoDashboard(){
-
         Intent intent = new Intent(this,DashboardActivity.class);
         startActivity(intent);
     }
-
 
     public void btnGoForgot(View view){
         Intent intent = new Intent(this,ForgotPassActivity.class);

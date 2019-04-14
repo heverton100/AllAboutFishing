@@ -27,7 +27,9 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_registro);
+
 
 
 
@@ -36,6 +38,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         mNameField = findViewById(R.id.txtNomeRegistro);
 
         findViewById(R.id.btnCadastrar).setOnClickListener(this);
+        findViewById(R.id.btnVoltarLogin).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -121,13 +124,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    public void backLogin2(View view){
-
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivityForResult(intent,1);
-        finish();
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -135,6 +131,10 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         if (i == R.id.btnCadastrar) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
 
+        }else if(i == R.id.btnVoltarLogin){
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivityForResult(intent,1);
+            finish();
         }
     }
 }
