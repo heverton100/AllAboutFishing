@@ -15,20 +15,16 @@
       },
       "oauth_client": [
         {
-          "client_id": "232047063631-47v96aktm3ttfpvse46a5m2b2ctlq420.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pucpr.heverton.allaboutfishing",
-            "certificate_hash": "365e2d8975cfe094543831508fa024e40fa0b7de"
-          }
-        },
-        {
-          "client_id": "232047063631-s1i1616t55odulam9pkgts4f9vlj9a97.apps.googleusercontent.com",
+          "client_id": "232047063631-4pu5n7foehc8s5gvmbpomh7e5q2u8s9r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pucpr.heverton.allaboutfishing",
             "certificate_hash": "b5bdef93c246d62e2ae2a750f07552a84ce645a1"
           }
+        },
+        {
+          "client_id": "232047063631-1p7mvakh0gpc9bjk535mtq9ktvg1egdd.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -40,12 +36,13 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "232047063631-61slgqe6k3raligtae9o4ftif2ogqi7q.apps.googleusercontent.com",
+              "client_id": "232047063631-1p7mvakh0gpc9bjk535mtq9ktvg1egdd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-8792404270645692~4650010816"
     }
   ],
   "configuration_version": "1"

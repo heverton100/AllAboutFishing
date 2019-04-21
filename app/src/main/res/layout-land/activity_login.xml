@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundoLoginLand"
+    android:background="@drawable/fundologinland"
     tools:context=".LoginActivity">
 
     <Button
@@ -54,14 +54,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:alpha="0.23"
+        android:alpha="0.5"
         android:background="@drawable/textviewshape"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toStartOf="@+id/btnCriarConta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLoginLogin" />
@@ -75,11 +76,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:alpha="0.23"
+        android:alpha="0.5"
         android:background="@drawable/textviewshape"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toStartOf="@+id/btnCriarConta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMailLogin" />
@@ -107,10 +109,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:layout_marginBottom="83dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:onClick="btnGoForgot"
         android:text="Esqueci minha senha"
@@ -136,6 +138,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSenhaForgotLogin" />
+
+    <ImageView
+        android:id="@+id/btnLoginGoogle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCriarConta"
+        app:srcCompat="@drawable/logingoogle" />
 
 </android.support.constraint.ConstraintLayout>

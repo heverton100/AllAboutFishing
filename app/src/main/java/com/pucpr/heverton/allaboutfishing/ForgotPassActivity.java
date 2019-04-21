@@ -65,4 +65,12 @@ public class ForgotPassActivity extends AppCompatActivity implements View.OnClic
                     }
                 });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent1 = new Intent(this,LoginActivity.class);
+        startActivityForResult(intent1,1);
+        finish();
+        super.onBackPressed();
+    }
 }

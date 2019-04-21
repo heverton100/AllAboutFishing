@@ -121,6 +121,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
@@ -136,5 +137,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             startActivityForResult(intent,1);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent1 = new Intent(this,LoginActivity.class);
+        startActivityForResult(intent1,1);
+        finish();
+        super.onBackPressed();
     }
 }

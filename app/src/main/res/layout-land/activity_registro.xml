@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundoCadastroLand"
+    android:background="@drawable/fundocadastroland"
     tools:context=".RegistroActivity">
 
     <Button
@@ -57,7 +57,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="Cadastre-se"
         android:textColor="@android:color/white"
@@ -75,9 +75,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="8dp"
         android:alpha="0.23"
         android:background="@drawable/textviewshape"
         android:ems="10"
@@ -85,7 +86,8 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/txtMailRegistro"
         app:layout_constraintEnd_toStartOf="@+id/btnVoltarLogin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCadastro" />
 
     <EditText
         android:id="@+id/txtMailRegistro"
@@ -93,9 +95,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="8dp"
         android:alpha="0.23"
         android:background="@drawable/textviewshape"
         android:ems="10"
@@ -103,7 +106,8 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/txtSenhaRegistro"
         app:layout_constraintEnd_toStartOf="@+id/btnVoltarLogin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeRegistro" />
 
     <EditText
         android:id="@+id/txtSenhaRegistro"
@@ -111,9 +115,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="220dp"
         android:layout_marginLeft="220dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="125dp"
         android:layout_marginRight="125dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         android:alpha="0.23"
         android:background="@drawable/textviewshape"
         android:ems="10"
@@ -121,7 +126,8 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
         app:layout_constraintEnd_toStartOf="@+id/btnVoltarLogin"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMailRegistro" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -129,6 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="278dp"
         android:layout_marginLeft="278dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="278dp"
         android:layout_marginRight="278dp"
         android:layout_marginBottom="32dp"
@@ -137,6 +144,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSenhaRegistro" />
 
 </android.support.constraint.ConstraintLayout>
