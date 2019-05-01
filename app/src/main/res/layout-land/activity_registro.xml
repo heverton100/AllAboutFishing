@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundocadastroland"
-    tools:context=".RegistroActivity">
+    tools:context=".view.RegistroActivity">
 
     <Button
         android:id="@+id/btnVoltarLogin"
