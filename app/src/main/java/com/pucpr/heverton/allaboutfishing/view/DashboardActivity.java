@@ -11,6 +11,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,10 +26,22 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.pucpr.heverton.allaboutfishing.CustomVolleyRequest;
 import com.pucpr.heverton.allaboutfishing.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,6 +50,13 @@ public class DashboardActivity extends AppCompatActivity
 
     private static final int MY_PERMISSION_REQUEST_LOCATION = 1;
     TextView tvCidade;
+    TextView tvTemperatura;
+    TextView tvDescricaoClima;
+    TextView tvDataHoje;
+
+    RequestQueue rq;
+
+    String request_url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +84,6 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         View hView =  navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
@@ -74,15 +95,34 @@ public class DashboardActivity extends AppCompatActivity
         //ImageView iv = hView.findViewById(R.id.ivUser);
 
 
+
+
+
         tvCidade = findViewById(R.id.textViewCidade);
+        tvTemperatura = findViewById(R.id.tvTemperatura);
+        tvDescricaoClima = findViewById(R.id.tvDescricaoClima);
+        tvDataHoje = findViewById(R.id.tvDataDash);
+
+
+
+
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         try{
-            tvCidade.setText(hereLocation(location.getLatitude(), location.getLongitude()));
+            hereLocation(location.getLatitude(), location.getLongitude());
         } catch (Exception e){
             e.printStackTrace();
             Toast.makeText(DashboardActivity.this,"ERRO", Toast.LENGTH_SHORT).show();
         }
+
+
+
+
+
+        //Log.d("Tag", "signInWithCredential:success" + request_url);
+        rq = CustomVolleyRequest.getInstance(this).getRequestQueue();
+        sendRequest();
 
 
     }
@@ -148,6 +188,9 @@ public class DashboardActivity extends AppCompatActivity
         return true;
     }
 
+
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode){
@@ -160,8 +203,7 @@ public class DashboardActivity extends AppCompatActivity
                         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                         try{
-                            tvCidade.setText(hereLocation(location.getLatitude(), location.getLongitude()));
-
+                            hereLocation(location.getLatitude(), location.getLongitude());
                         } catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(DashboardActivity.this,"ERRO", Toast.LENGTH_SHORT).show();
@@ -175,6 +217,10 @@ public class DashboardActivity extends AppCompatActivity
     }
 
 
+
+
+
+
     public String hereLocation(double lat, double lon){
         String curCity = "";
 
@@ -186,6 +232,8 @@ public class DashboardActivity extends AppCompatActivity
             if(addressList != null && addressList.size() > 0){
 
                 curCity = addressList.get(0).getAdminArea()+"-"+addressList.get(0).getSubAdminArea();
+                //Log.d("Tag", "signInWithCredential:success" + curCity);
+                request_url = "https://allaboutfishing.azurewebsites.net/apitempo.php?vCity="+addressList.get(0).getSubAdminArea()+"&vState="+addressList.get(0).getAdminArea();
             }else{
                 Toast.makeText(DashboardActivity.this,"ERRO", Toast.LENGTH_SHORT).show();
             }
@@ -197,4 +245,58 @@ public class DashboardActivity extends AppCompatActivity
         return curCity;
 
     }
+
+
+
+
+
+
+    public void sendRequest() {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, request_url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    String cidade = response.getString("name");
+                    String estado = response.getString("state");
+                    String country = response.getString("country");
+                    String id = response.getString("id");
+
+                    JSONObject news = response.getJSONObject("data");
+                    String temperature = news.getString("temperature");
+                    String humidity = news.getString("humidity");
+                    String condition = news.getString("condition");
+
+                    tvCidade.setText(cidade+"-"+estado);
+                    tvTemperatura.setText(temperature+"º");
+                    tvDescricaoClima.setText(condition);
+
+
+                    DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm",Locale.getDefault());
+                    String date = df.format(Calendar.getInstance().getTime());
+
+                    tvDataHoje.setText(date);
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        CustomVolleyRequest.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+
 }
