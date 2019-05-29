@@ -10,10 +10,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.text.TextUtilsCompat;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pucpr.heverton.allaboutfishing.CustomVolleyRequest;
 import com.pucpr.heverton.allaboutfishing.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,16 +86,15 @@ public class DashboardActivity extends AppCompatActivity
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        View hView =  navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
+        View hView = navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
         TextView tv = hView.findViewById(R.id.tvNameUserDash);
         TextView tv2 = hView.findViewById(R.id.tvMailUserDash);
 
         tv.setText(user.getDisplayName());
         tv2.setText(user.getEmail());
-        //ImageView iv = hView.findViewById(R.id.ivUser);
-
-
-
+        ImageView iv = hView.findViewById(R.id.ivPerfilDash);
+        Picasso.get()
+                .load(user.getPhotoUrl()).resize(100, 100).into(iv);
 
 
         tvCidade = findViewById(R.id.textViewCidade);
@@ -104,10 +103,17 @@ public class DashboardActivity extends AppCompatActivity
         tvDataHoje = findViewById(R.id.tvDataDash);
 
 
-
-
-
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         try{
             hereLocation(location.getLatitude(), location.getLongitude());

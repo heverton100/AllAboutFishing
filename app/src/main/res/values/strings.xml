@@ -9,4 +9,15 @@
     <string name="action_settings">Settings</string>
     <string name="btnEnviar">Enviar</string>
     <string name="Logo">Logo</string>
+
+
+    <string name="strSignup">Signup</string>
+    <string name="strCadastrar">Cadastrar</string>
+    <string name="strEntrar">Entrar</string>
+    <string name="strForgotSenha">Esqueci Minha Senha</string>
+    <string name="strLogin">Login</string>
+    <string name="strCadastre">Cadastre-se</string>
+    <string name="strNome">Nome</string>
+    <string name="strEmail">E-mail</string>
+    <string name="strSenha">Senha</string>
 </resources>
