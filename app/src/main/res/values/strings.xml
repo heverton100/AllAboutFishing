@@ -20,4 +20,5 @@
     <string name="strNome">Nome</string>
     <string name="strEmail">E-mail</string>
     <string name="strSenha">Senha</string>
+
 </resources>
