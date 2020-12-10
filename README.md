@@ -6,3 +6,7 @@ O objetivo principal do App é facilitar a procura por locais para pescar, e tam
 ![alt text](https://i.imgur.com/zAhSpPo.png)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/heverton100/AllAboutFishing)
+
+![Stage](https://img.shields.io/badge/stage-project%20in%20stand%20by-blue)
+
+
