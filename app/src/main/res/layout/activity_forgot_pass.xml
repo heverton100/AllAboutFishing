@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,57 +7,82 @@
     android:background="@drawable/fundoforgotpass"
     tools:context=".view.ForgotPassActivity">
 
-    <TextView
-        android:id="@+id/tvForgotSenha"
+    <Button
+        android:id="@+id/btnBackLoginForgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Esqueci Minha Senha"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/loginbuttonshape"
+        android:text="@string/btn_sign_in"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <Button
+        android:id="@+id/btnBackSignupForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/loginbuttonshape"
+        android:text="@string/btn_signup"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackLoginForgot"
+        app:layout_constraintVertical_bias="0.053" />
+
+
+    <TextView
+        android:id="@+id/lblForgotPassForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="@string/lbl_forgot_pass"
         android:textColor="@android:color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtMailForgot"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:alpha="0.70"
         android:background="@drawable/textviewshape"
-        android:ems="10"
-        android:hint="E-mail"
+        android:ems="11"
+        android:hint="@string/txt_email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvForgotSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/lblForgotPassForgot" />
 
     <Button
-        android:id="@+id/btnTrocarSenha"
-        android:layout_width="0dp"
+        android:id="@+id/btnSendEmailForgotPass"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginLeft="180dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/btnEnviar"
+        android:text="@string/btn_send_forgot_pass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMailForgot"
         app:layout_constraintVertical_bias="0.0" />
@@ -67,10 +92,9 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
-        android:contentDescription="@string/Logo"
+        android:contentDescription="@string/lbl_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
