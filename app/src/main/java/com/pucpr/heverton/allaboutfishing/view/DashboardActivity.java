@@ -1,10 +1,16 @@
 package com.pucpr.heverton.allaboutfishing.view;
 
 
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -13,10 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,20 +34,35 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import com.pucpr.heverton.allaboutfishing.R;
+import com.pucpr.heverton.allaboutfishing.model.Weathers;
+import com.pucpr.heverton.allaboutfishing.remote.ApiUtils;
+import com.pucpr.heverton.allaboutfishing.remote.GpsTracker;
+import com.pucpr.heverton.allaboutfishing.remote.PostService;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    TextView tv_city;
+    TextView tv_temperature;
+    TextView tv_desc_weather;
+    TextView tv_date_today;
 
-    TextView tvCidade;
-    TextView tvTemperatura;
-    TextView tvDescricaoClima;
-    TextView tvDataHoje;
+    ImageView iv;
+    TextView tv,tv2;
 
+    private PostService mService;
+    private GpsTracker gpsTracker;
 
+    String x,y,z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +73,9 @@ public class DashboardActivity extends AppCompatActivity
         getSupportActionBar().setTitle("All About Fishing");
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(DashboardActivity.this, "Em desenvolvimento!",
-                        Toast.LENGTH_SHORT).show();
-            }
+        fab.setOnClickListener(view -> {
+            Toast.makeText(DashboardActivity.this, "Em desenvolvimento!",
+                    Toast.LENGTH_SHORT).show();
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -66,24 +87,72 @@ public class DashboardActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        mService = ApiUtils.getPostService();
 
         View hView = navigationView.inflateHeaderView(R.layout.nav_header_dashboard);
-        TextView tv = hView.findViewById(R.id.tvNameUserDash);
-        TextView tv2 = hView.findViewById(R.id.tvMailUserDash);
+        tv = hView.findViewById(R.id.tvNameUserDash);
+        tv2 = hView.findViewById(R.id.tvMailUserDash);
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        x = sharedPreferences.getString("user_name","");
+        y = sharedPreferences.getString("user_email","");
+        z = sharedPreferences.getString("user_image","");
+        tv.setText(x);
+        tv2.setText(y);
 
-        ImageView iv = hView.findViewById(R.id.ivPerfilDash);
+        iv = hView.findViewById(R.id.ivPerfilDash);
+
+        if (z.isEmpty()){
+            z="PATH IMAGE";
+        }
         Picasso.get()
-                .load("CAMINHO IMAGEM").resize(100, 100).into(iv);
+                .load(z).resize(100, 100).into(iv);
 
+        iv.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, EditProfileActivity.class);
+            startActivity(intent);
+        });
 
-        tvCidade = findViewById(R.id.textViewCidade);
-        tvTemperatura = findViewById(R.id.tvTemperatura);
-        tvDescricaoClima = findViewById(R.id.tvDescricaoClima);
-        tvDataHoje = findViewById(R.id.tvDataDash);
+        findViewById(R.id.ivPlacesDash).setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, PlacesActivity.class);
+            startActivity(intent);
+        });
 
+        tv_city = findViewById(R.id.tvCity);
+        tv_temperature = findViewById(R.id.tvTemperature);
+        tv_desc_weather = findViewById(R.id.tvDescWeather);
+        tv_date_today = findViewById(R.id.tvDateDash);
 
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        gpsTracker = new GpsTracker(this);
+        if(gpsTracker.canGetLocation()){
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            hereLocation(latitude,longitude);
+        }else{
+            gpsTracker.showSettingsAlert();
+            Log.d("DASHActivity", "DEU RUIMMMMMMMMM");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        x = sharedPreferences.getString("user_name","");
+        z = sharedPreferences.getString("user_image","");
+
+        tv.setText(x);
+
+        Picasso.get()
+                .load(z).resize(100, 100).into(iv);
     }
 
     @Override
@@ -127,15 +196,16 @@ public class DashboardActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_locais) {
-            // Handle the camera action
-        } else if (id == R.id.nav_dicas) {
+        if (id == R.id.nav_places) {
+            Intent intent = new Intent(DashboardActivity.this, PlacesActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_tips) {
 
         } else if (id == R.id.nav_map) {
 
-        } else if (id == R.id.nav_sobre) {
+        } else if (id == R.id.nav_about) {
 
-        } else if (id == R.id.nav_sair) {
+        } else if (id == R.id.nav_logout) {
 
             Intent intent = new Intent(DashboardActivity.this,LoginActivity.class);
             startActivity(intent);
@@ -145,6 +215,58 @@ public class DashboardActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void returnWeather(String city, String state) {
+
+        mService.getWeather(city,state).enqueue(new Callback<Weathers>() {
+            @Override
+            public void onResponse(@NonNull Call<Weathers> call, @NonNull Response<Weathers> response) {
+                if(response.isSuccessful()) {
+                    if(response.body().getResponse().equals("success")) {
+
+                        tv_city.setText(response.body().getCity());
+                        tv_desc_weather.setText(response.body().getCondition());
+                        tv_temperature.setText(response.body().getTemperature().toString()+"°");
+
+                        Log.d("DASHActivity", "SUCCESS");
+
+                    }else{
+
+                        Log.d("DASHActivity", "FAILED");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Weathers> call, @NonNull Throwable t) {
+                Log.e("LOG ERROR", "Unable to submit post to API."+t);
+            }
+        });
+    }
+
+    public void hereLocation(double lat, double lon){
+
+        Geocoder geocoder = new Geocoder(DashboardActivity.this, Locale.getDefault());
+        List<Address> addressList;
+
+        try{
+
+            addressList = geocoder.getFromLocation(lat,lon,1);
+
+            if(addressList != null && addressList.size() > 0){
+
+                returnWeather(addressList.get(0).getSubAdminArea(),addressList.get(0).getAdminArea());
+
+            }else{
+                Toast.makeText(DashboardActivity.this,"ERRO", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 

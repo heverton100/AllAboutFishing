@@ -1,6 +1,8 @@
 package com.pucpr.heverton.allaboutfishing.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -40,7 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
-
         mEmailField = findViewById(R.id.txtEmail);
         mPasswordField = findViewById(R.id.txtPass);
         mResponse = findViewById(R.id.textviewResponse);
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!validateForm()) {
             return;
         }
-        // [START sign_in_with_email]
+
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass)) {
             mService.login(email,pass).enqueue(new Callback<Users>() {
                 @Override
@@ -84,6 +85,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this,"Email Not Found or Not Verified!",Toast.LENGTH_LONG).show();
 
                         }else if(response.body().getResponse().equals("success")){
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("user_name",response.body().getName());
+                            editor.putString("user_email",response.body().getEmail());
+                            editor.putInt("user_id",response.body().getId());
+                            editor.putString("user_phone",response.body().getPhone());
+                            editor.putString("user_image",response.body().getUrl_image());
+                            editor.commit();
 
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivityForResult(intent,1);

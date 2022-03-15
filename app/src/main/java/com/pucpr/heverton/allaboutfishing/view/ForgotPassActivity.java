@@ -30,10 +30,8 @@ public class ForgotPassActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_forgot_pass);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Forgot My Password");
 
         emailForgot = findViewById(R.id.txtMailForgot);
 

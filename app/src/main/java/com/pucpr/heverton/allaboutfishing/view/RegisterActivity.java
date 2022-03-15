@@ -81,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return valid;
     }
 
-
     private void createAccount(String name, String email, String password, String phone) {
         if (!validateForm()) {
             return;

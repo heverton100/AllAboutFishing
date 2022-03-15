@@ -5,25 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_locais"
+            android:id="@+id/nav_places"
             android:icon="@drawable/ic_place_black_24dp"
-            android:title="Locais Principais" />
+            android:title="@string/nav_places" />
         <item
-            android:id="@+id/nav_dicas"
+            android:id="@+id/nav_tips"
             android:icon="@drawable/ic_assistant_black_24dp"
-            android:title="Dicas de Pesca" />
+            android:title="@string/nav_tips" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map_black_24dp"
-            android:title="Mapa dos Locais" />
+            android:title="@string/nav_map" />
         <item
-            android:id="@+id/nav_sobre"
+            android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_outline_black_24dp"
-            android:title="Sobre" />
+            android:title="@string/nav_about" />
         <item
-            android:id="@+id/nav_sair"
+            android:id="@+id/nav_logout"
             android:icon="@drawable/ic_highlight_off_black_24dp"
-            android:title="Sair" />
+            android:title="@string/nav_logout" />
     </group>
 
 </menu>

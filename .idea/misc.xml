@@ -3,21 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/drawable/buttonshape.xml" value="0.2890625" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/drawable/gradient_background.xml" value="0.2890625" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout-land/activity_forgot_pass.xml" value="0.2310405643738977" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout-land/activity_login.xml" value="0.2310405643738977" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout-land/activity_registro.xml" value="0.2310405643738977" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout-land/content_dashboard.xml" value="0.2310405643738977" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_dashboard.xml" value="0.25905797101449274" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_edit_profile.xml" value="0.23641304347826086" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_forgot_pass.xml" value="0.25905797101449274" />
-        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_login2.xml" value="0.25" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_main.xml" value="0.25905797101449274" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_places.xml" value="0.2513586956521739" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_register.xml" value="0.2694746376811594" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/activity_registro.xml" value="0.25" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/app_bar_dashboard.xml" value="0.25905797101449274" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/cell_places.xml" value="0.2513586956521739" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/content_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/layout/nav_header_dashboard.xml" value="0.25905797101449274" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/menu/activity_dashboard_drawer.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/menu/dashboard.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2890625" />
+        <entry key="..\:/Users/ton14/AndroidStudioProjects/AllAboutFishing/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2890625" />
       </map>
     </option>
   </component>
