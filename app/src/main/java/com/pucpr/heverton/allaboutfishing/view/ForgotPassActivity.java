@@ -47,12 +47,10 @@ public class ForgotPassActivity extends AppCompatActivity implements View.OnClic
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        switch (id){
-            case android.R.id.home:
-                Intent intent1 = new Intent(this, LoginActivity.class);
-                startActivityForResult(intent1,1);
-                finish();
-                break;
+        if (id == android.R.id.home) {
+            Intent intent1 = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent1, 1);
+            finish();
         }
         return true;
     }
@@ -95,12 +93,15 @@ public class ForgotPassActivity extends AppCompatActivity implements View.OnClic
                             startActivity(intent);
 
                         }
+                    }else{
+                        int statusCode = response.code();
+                        Log.e("FORGOT_PASS_ACTIVITY", "Call REST return: "+statusCode);
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
-                    Log.e("LOG ERROR", "Unable to submit post to API."+t);
+                    Log.e("FORGOT_PASS_ACTIVITY", "Unable to submit post to API."+t);
                 }
             });
         }

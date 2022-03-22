@@ -1,6 +1,5 @@
 package com.pucpr.heverton.allaboutfishing.view;
 
-
 import android.content.Context;
 import android.content.Intent;
 
@@ -47,17 +46,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView tv_city;
-    TextView tv_temperature;
-    TextView tv_desc_weather;
-    TextView tv_date_today;
-
+    TextView tv_city, tv_temperature, tv_desc_weather, tv_date_today, tv,tv2;
     ImageView iv;
-    TextView tv,tv2;
 
     private PostService mService;
     private GpsTracker gpsTracker;
@@ -73,10 +66,8 @@ public class DashboardActivity extends AppCompatActivity
         getSupportActionBar().setTitle("All About Fishing");
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Toast.makeText(DashboardActivity.this, "Em desenvolvimento!",
-                    Toast.LENGTH_SHORT).show();
-        });
+        fab.setOnClickListener(view -> Toast.makeText(DashboardActivity.this, "COMING SOON!",
+                Toast.LENGTH_SHORT).show());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -113,7 +104,7 @@ public class DashboardActivity extends AppCompatActivity
             startActivity(intent);
         });
 
-        findViewById(R.id.ivPlacesDash).setOnClickListener(v -> {
+        findViewById(R.id.cvPlaces).setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, PlacesActivity.class);
             startActivity(intent);
         });
@@ -138,7 +129,7 @@ public class DashboardActivity extends AppCompatActivity
             hereLocation(latitude,longitude);
         }else{
             gpsTracker.showSettingsAlert();
-            Log.d("DASHActivity", "DEU RUIMMMMMMMMM");
+            Log.e("DASHBOARD_ACTIVITY", "ERROR GPS TRACKER");
         }
     }
 
@@ -199,7 +190,7 @@ public class DashboardActivity extends AppCompatActivity
         if (id == R.id.nav_places) {
             Intent intent = new Intent(DashboardActivity.this, PlacesActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_tips) {
+        } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_map) {
 
@@ -229,11 +220,9 @@ public class DashboardActivity extends AppCompatActivity
                         tv_desc_weather.setText(response.body().getCondition());
                         tv_temperature.setText(response.body().getTemperature().toString()+"°");
 
-                        Log.d("DASHActivity", "SUCCESS");
-
                     }else{
 
-                        Log.d("DASHActivity", "FAILED");
+                        Log.e("DASHBOARD_ACTIVITY", "FAILED API WEATHER");
 
                     }
                 }
@@ -241,7 +230,7 @@ public class DashboardActivity extends AppCompatActivity
 
             @Override
             public void onFailure(@NonNull Call<Weathers> call, @NonNull Throwable t) {
-                Log.e("LOG ERROR", "Unable to submit post to API."+t);
+                Log.e("DASHBOARD_ACTIVITY", "Unable to submit post to API."+t);
             }
         });
     }
@@ -260,14 +249,11 @@ public class DashboardActivity extends AppCompatActivity
                 returnWeather(addressList.get(0).getSubAdminArea(),addressList.get(0).getAdminArea());
 
             }else{
-                Toast.makeText(DashboardActivity.this,"ERRO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DashboardActivity.this,"ERROR LOCATION", Toast.LENGTH_SHORT).show();
             }
 
-        } catch (Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
-
 }

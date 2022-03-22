@@ -60,16 +60,15 @@ public class PlacesActivity extends AppCompatActivity {
 
                 if(response.isSuccessful()){
                     mAdapter.updatePlaces(response.body());
-                    Log.d("MainActivity", "Success.");
                 }else {
                     int statusCode = response.code();
-                    Log.d("MainActivity", "Call REST return: "+statusCode);
+                    Log.d("PLACES_ACTIVITY", "Call REST return: "+statusCode);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Places>> call, @NonNull Throwable t) {
-                Log.d("MainActivity", "Error in call REST"+t);
+                Log.d("PLACES_ACTIVITY", "Error in call REST"+t);
             }
         });
 

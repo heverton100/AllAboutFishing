@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_place_black_24dp"
             android:title="@string/nav_places" />
         <item
-            android:id="@+id/nav_tips"
-            android:icon="@drawable/ic_assistant_black_24dp"
-            android:title="@string/nav_tips" />
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_gallery" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map_black_24dp"

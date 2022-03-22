@@ -1,5 +1,6 @@
 package com.pucpr.heverton.allaboutfishing.remote;
 
+import com.pucpr.heverton.allaboutfishing.model.Galleries;
 import com.pucpr.heverton.allaboutfishing.model.Places;
 import com.pucpr.heverton.allaboutfishing.model.Users;
 import com.pucpr.heverton.allaboutfishing.model.Weathers;
@@ -15,7 +16,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-
 
 public interface PostService {
 
@@ -53,5 +53,18 @@ public interface PostService {
                        @Field("name") String name,
                        @Field("phone") String phone,
                        @Field("url_image") String url_image);
+
+    @GET("places/place/{id}")
+    Call<Places> getPlace(@Path(value="id", encoded=true) Integer id);
+
+    @GET("galleries/getallplace/{place_id}")
+    Call<List<Galleries>> getPlaceGallery(@Path(value="place_id", encoded=true) Integer place_id);
+
+    @Multipart
+    @POST("galleries/new")
+    Call<Galleries> newPhoto(@Part("url_photo\"; filename=\"photo.jpg\" ") RequestBody url_photo,
+                            @Part("user_id") RequestBody user_id,
+                            @Part("place_id") RequestBody place_id,
+                            @Part("subtitle") RequestBody subtitle);
 
 }

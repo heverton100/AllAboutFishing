@@ -34,15 +34,10 @@ public class MainActivity extends AppCompatActivity {
         loadAPI();
 
         Handler handle = new Handler();
-        handle.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mostrarLogin();
-            }
-        }, 2000);
+        handle.postDelayed(this::showLogin, 2000);
     }
 
-    private void mostrarLogin() {
+    private void showLogin() {
         Intent intent = new Intent(MainActivity.this,
                 LoginActivity.class);
         startActivityForResult(intent,1);
@@ -57,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<Places>> call, @NonNull Response<List<Places>> response) {
 
-                if(response.isSuccessful()) {
-                    Log.d("MainActivity", "SUCCESS");
-                }else {
+                if(!response.isSuccessful()) {
                     int statusCode = response.code();
                     Log.d("MainActivity", "Call REST return: "+statusCode);
                 }

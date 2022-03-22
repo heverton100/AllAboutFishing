@@ -76,35 +76,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onResponse(@NonNull Call<Users> call, @NonNull Response<Users> response) {
                     if(response.isSuccessful()) {
-                        if(response.body().getResponse().equals("failed")) {
+                        switch (response.body().getResponse()) {
+                            case "failed":
 
-                            Toast.makeText(LoginActivity.this,"Incorrect Password!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Incorrect Password!", Toast.LENGTH_LONG).show();
 
-                        }else if(response.body().getResponse().equals("email not found")){
+                                break;
+                            case "email not found":
 
-                            Toast.makeText(LoginActivity.this,"Email Not Found or Not Verified!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Email Not Found or Not Verified!", Toast.LENGTH_LONG).show();
 
-                        }else if(response.body().getResponse().equals("success")){
+                                break;
+                            case "success":
 
-                            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("user_name",response.body().getName());
-                            editor.putString("user_email",response.body().getEmail());
-                            editor.putInt("user_id",response.body().getId());
-                            editor.putString("user_phone",response.body().getPhone());
-                            editor.putString("user_image",response.body().getUrl_image());
-                            editor.commit();
+                                SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("user_name", response.body().getName());
+                                editor.putString("user_email", response.body().getEmail());
+                                editor.putInt("user_id", response.body().getId());
+                                editor.putString("user_phone", response.body().getPhone());
+                                editor.putString("user_image", response.body().getUrl_image());
+                                editor.commit();
 
-                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            startActivityForResult(intent,1);
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                startActivityForResult(intent, 1);
 
+                                break;
                         }
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
-                    Log.e("LOG ERROR", "Unable to submit post to API."+t);
+                    Log.e("LOGIN_ACTIVITY", "Unable to submit post to API."+t);
                 }
             });
         }

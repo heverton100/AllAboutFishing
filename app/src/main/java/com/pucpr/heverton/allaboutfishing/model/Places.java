@@ -153,4 +153,12 @@ public class Places {
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }
+
+    public String getResponse() {
+        return Response;
+    }
+
+    public void setResponse(String response) {
+        Response = response;
+    }
 }

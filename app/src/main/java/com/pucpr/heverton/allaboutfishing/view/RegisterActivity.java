@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String name = mNameField.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            mNameField.setError("Campo Obrigatório!");
+            mNameField.setError("Required.");
             valid = false;
         } else {
             mNameField.setError(null);
@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String email = mEmailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Campo Obrigatório!");
+            mEmailField.setError("Required.");
             valid = false;
         } else {
             mEmailField.setError(null);
@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            mPasswordField.setError("Campo Obrigatório!");
+            mPasswordField.setError("Required.");
             valid = false;
         } else {
             mPasswordField.setError(null);
@@ -106,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 @Override
                 public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
-                    Log.e("LOG ERROR", "Unable to submit post to API."+t);
+                    Log.e("REGISTER_ACTIVITY", "Unable to submit post to API."+t);
                 }
             });
         }

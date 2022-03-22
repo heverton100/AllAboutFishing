@@ -1,11 +1,8 @@
 package com.pucpr.heverton.allaboutfishing.view;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
@@ -22,10 +19,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,7 +80,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         iv = findViewById(R.id.imgEditProfile);
 
-
         findViewById(R.id.imgEditProfile).setOnClickListener(v -> {
             Intent i2 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             someActivityResultLauncher.launch(i2);
@@ -103,18 +97,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
         someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
-                            Intent data = result.getData();
-                            //the image URI
-                            Uri selectedImage = data.getData();
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        //the image URI
+                        Uri selectedImage = data.getData();
 
-                            //calling the upload file method after choosing the file
-                            uploadFile(selectedImage, "My Image", email_sp);
-                        }
+                        //calling the upload file method after choosing the file
+                        uploadFile(selectedImage, "My Image", email_sp);
                     }
                 });
 
@@ -159,14 +150,15 @@ public class EditProfileActivity extends AppCompatActivity {
                     image_temp = response.body().getUrl_image();
                     Picasso.get()
                             .load(response.body().getUrl_image()).resize(100, 100).into(iv);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Some error occurred...", Toast.LENGTH_LONG).show();
+                }else{
+                    int statusCode = response.code();
+                    Log.e("EDIT_PROFILE_ACTIVITY", "Call REST return: "+statusCode);
                 }
             }
 
             @Override
-            public void onFailure(Call<Users> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
+                Log.e("EDIT_PROFILE_ACTIVITY", "Unable to submit post to API."+t);
             }
         });
     }
@@ -217,13 +209,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     }
                 }else{
-                    Log.e("UPDATEEEEE", "TESTANDPNAJKF."+id+name+phone+url_image+response.body());
+                    int statusCode = response.code();
+                    Log.e("EDIT_PROFILE_ACTIVITY", "Call REST return: "+statusCode);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Users> call, @NonNull Throwable t) {
-                Log.e("LOG ERROR", "Unable to submit post to API."+t);
+                Log.e("EDIT_PROFILE_ACTIVITY", "Unable to submit post to API."+t);
             }
         });
     }

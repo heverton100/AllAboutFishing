@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".view.AddPhotoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.PlaceDetailsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_place_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.EditProfileActivity"
             android:exported="false" />
         <activity
